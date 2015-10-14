@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stdafx">
+      <UniqueIdentifier>{ac489d70-ce9c-4ef3-a88a-b82e89638234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cme">
+      <UniqueIdentifier>{b4c10a31-df1a-4448-8092-b4f7a63da410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cme\include">
+      <UniqueIdentifier>{f4e78f89-f718-4337-bcb4-1d55d9a5b276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cme\include\details">
+      <UniqueIdentifier>{5584f871-c82e-491f-8bd1-73e77c17e272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cme\sources">
+      <UniqueIdentifier>{27c15d21-06d0-46db-a3ec-c809f09f0414}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>stdafx</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\calculator.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\cme.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\expression.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\reverse_polish_notation.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\tables.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\token.hpp">
+      <Filter>cme\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\base_types.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\create_rpn_algorithm.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\string_to_real_cast.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\table_base.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\unary_math_function.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\rpn_make_grammar.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cme\details\map_key_iterator.hpp">
+      <Filter>cme\include\details</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>stdafx</Filter>
+    </ClCompile>
+    <ClCompile Include="calculator.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="expression.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="reverse_polish_notation.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="string_to_real_cast.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="tables.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="token.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="unary_math_function.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="rpn_make_grammar.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="create_rpn_algorithm.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="cme.cpp">
+      <Filter>cme\sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
