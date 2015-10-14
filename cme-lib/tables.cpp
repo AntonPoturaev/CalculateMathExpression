@@ -20,25 +20,6 @@ namespace cme {
 	constant_table::constant_table()
 		: details::constant_table_t()
 	{
-		add("PI", "3.14159265358979323846");
-		add("ROOT_PI", "1.772453850905516027");
-		add("ROOT_HALF_PI", "1.253314137315500251");
-		add("ROOT_TWO_PI", "2.506628274631000502");
-		add("ROOT_LN_FOUR", "1.17741002251547469");
-		add("E", "2.71828182845904523536");
-		add("HALF", "0.5");
-		add("EULER", "0.577215664901532860606");
-		add("ROOT_TWO", "1.4142135623730950488");
-		add("LN_TWO", "0.6931471805599453094");
-		add("LN_LN_TWO", "-0.3665129205816643");
-		add("THIRD", "0.333333333333333333");
-		add("TWOTHIRD", "0.666666666666666666");
-		add("PI_MINUS_THREE", "0.14159265358979323846");
-		add("FOUR_MINUS_PI", "0.85840734641020676153735");
-		add("GOLDEN_RATIO", "1.61803398874989484820458683436563811");
-		add("C", "2.99792458e8"); /// Light Speed
-		add("PLANK_CONST", "6.6260693e-34");
-		/// etc...
 	}
 
 	constant_table::constant_table(constant_table&& other)
@@ -51,41 +32,37 @@ namespace cme {
 		details::constant_table_t::operator =(std::forward<details::constant_table_t>(static_cast<details::constant_table_t&&>(other)));
 		return *this;
 	}
+
+	constant_table constant_table::make_by_default()
+	{
+		constant_table ctlb;
+
+		ctlb.add("PI", "3.14159265358979323846");
+		ctlb.add("ROOT_PI", "1.772453850905516027");
+		ctlb.add("ROOT_HALF_PI", "1.253314137315500251");
+		ctlb.add("ROOT_TWO_PI", "2.506628274631000502");
+		ctlb.add("ROOT_LN_FOUR", "1.17741002251547469");
+		ctlb.add("E", "2.71828182845904523536");
+		ctlb.add("HALF", "0.5");
+		ctlb.add("EULER", "0.577215664901532860606");
+		ctlb.add("ROOT_TWO", "1.4142135623730950488");
+		ctlb.add("LN_TWO", "0.6931471805599453094");
+		ctlb.add("LN_LN_TWO", "-0.3665129205816643");
+		ctlb.add("THIRD", "0.333333333333333333");
+		ctlb.add("TWOTHIRD", "0.666666666666666666");
+		ctlb.add("PI_MINUS_THREE", "0.14159265358979323846");
+		ctlb.add("FOUR_MINUS_PI", "0.85840734641020676153735");
+		ctlb.add("GOLDEN_RATIO", "1.61803398874989484820458683436563811");
+		ctlb.add("C", "2.99792458e8"); /// Light Speed
+		ctlb.add("PLANK_CONST", "6.6260693e-34");
+		/// etc...
+
+		return ctlb;
+	}
 	
 	unary_math_function_table::unary_math_function_table()
 		: details::unary_math_function_table_t()
 	{
-		add("tg", &details::tg);
-		add("ctg", &details::ctg);
-		add("sin", &details::sin);
-		add("cos", &details::cos);
-
-		add("atg", &details::atg);
-		add("actg", &details::actg);
-		add("asinh", &details::asinh);
-		add("acosh", &details::acosh);
-		add("cosh", &details::cosh);
-		add("sinh", &details::sinh);
-
-		add("tgh", &details::tgh);
-		add("ctgh", &details::ctgh);
-		add("atgh", &details::atgh);
-		add("actgh", &details::actgh);
-
-		add("sec", &details::sec);
-		add("cosec", &details::cosec);
-		add("sech", &details::sech);
-		add("cosech", &details::cosech);
-		add("asech", &details::asech);
-		add("acosech", &details::acosech);
-
-		add("exp", &details::exp);
-		add("ln", &details::ln);
-		add("lg", &details::lg);
-		add("modul", &details::modul);
-		add("fact", &details::fact);
-		add("dfact", &details::dfact);
-		add("sqrt", &details::sqrt);
 	}
 
 	unary_math_function_table::unary_math_function_table(unary_math_function_table&& other)
@@ -97,6 +74,45 @@ namespace cme {
 	{
 		details::unary_math_function_table_t::operator =(std::forward<details::unary_math_function_table_t>(static_cast<details::unary_math_function_table_t&&>(other)));
 		return *this;
+	}
+
+	unary_math_function_table unary_math_function_table::make_by_default()
+	{
+		unary_math_function_table umftlb;
+
+		umftlb.add("tg", &details::tg);
+		umftlb.add("ctg", &details::ctg);
+		umftlb.add("sin", &details::sin);
+		umftlb.add("cos", &details::cos);
+
+		umftlb.add("atg", &details::atg);
+		umftlb.add("actg", &details::actg);
+		umftlb.add("asinh", &details::asinh);
+		umftlb.add("acosh", &details::acosh);
+		umftlb.add("cosh", &details::cosh);
+		umftlb.add("sinh", &details::sinh);
+
+		umftlb.add("tgh", &details::tgh);
+		umftlb.add("ctgh", &details::ctgh);
+		umftlb.add("atgh", &details::atgh);
+		umftlb.add("actgh", &details::actgh);
+
+		umftlb.add("sec", &details::sec);
+		umftlb.add("cosec", &details::cosec);
+		umftlb.add("sech", &details::sech);
+		umftlb.add("cosech", &details::cosech);
+		umftlb.add("asech", &details::asech);
+		umftlb.add("acosech", &details::acosech);
+
+		umftlb.add("exp", &details::exp);
+		umftlb.add("ln", &details::ln);
+		umftlb.add("lg", &details::lg);
+		umftlb.add("modul", &details::modul);
+		umftlb.add("fact", &details::fact);
+		umftlb.add("dfact", &details::dfact);
+		umftlb.add("sqrt", &details::sqrt);
+
+		return umftlb;
 	}
 
 	variable_table::variable_table()
@@ -132,12 +148,10 @@ namespace cme {
 
 			static sregex const number = []()->sregex
 			{
-				sregex const fractional_constant_ = (*digit >> '.' >> +digit) | (+digit >> '.');
-				sregex const exponent_part_ = (set = 'e', 'E') >> ~(set = '+', '-') >> +digit;
-				sregex const fp_ = fractional_constant_ >> !exponent_part_ | +digit >> exponent_part_;
-				sregex const number_ = !(as_xpr('+') | '-') >> (fp_ | +digit);
-
-				return number_;
+				sregex const fractional_constant = (*digit >> '.' >> +digit) | (+digit >> '.');
+				sregex const exponent_part = (set = 'e', 'E') >> ~(set = '+', '-') >> +digit;
+				sregex const floating_point_literal = fractional_constant >> !exponent_part | +digit >> exponent_part;
+				return !(as_xpr('+') | '-') >> (floating_point_literal | +digit);
 			}();
 
 			return regex_match(str, number);

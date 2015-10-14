@@ -18,13 +18,12 @@ namespace cme { namespace details {
 		class fill_symbols_table
 		{
 		public:
-			template<typename Tlb>
-			static void call(symbol_table_t& symbols, std::string const& name, Tlb const& tlb)
+			template<typename TlbPtr>
+			static void call(symbol_table_t& symbols, std::string const& name, TlbPtr const& tlbPtr)
 			{
 				fill_symbols_table self(symbols, name);
-				std::for_each(make_map_key_iterator(tlb.begin()), make_map_key_iterator(tlb.end())
-					, std::bind(&fill_symbols_table::_add_node, self, std::placeholders::_1)
-				);
+				if (tlbPtr)
+					self._fill(*tlbPtr);
 			}
 
 		private:
@@ -32,6 +31,14 @@ namespace cme { namespace details {
 				: symbols_(symbols)
 			{
 				symbols_.name(name);
+			}
+
+			template<typename Tlb>
+			void _fill(Tlb const& tlb)
+			{
+				std::for_each(make_map_key_iterator(tlb.begin()), make_map_key_iterator(tlb.end())
+					, std::bind(&fill_symbols_table::_add_node, this, std::placeholders::_1)
+				);
 			}
 
 			void _add_node(string_t const& str) {
@@ -48,7 +55,7 @@ namespace cme { namespace details {
 		
 	} /// end unnamed namespace
 	
-	rpn_make_grammar::rpn_make_grammar(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb)
+	rpn_make_grammar::rpn_make_grammar(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb)
 		: base_type(start_)
 	{
 		fill_symbols_table::call(variable_, "variable_table", vtlb);

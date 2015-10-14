@@ -48,7 +48,13 @@ namespace cme {
 			}
 		};
 
-		power<real_t> const power_;
+		template<typename RealTy>
+		struct root
+		{
+			RealTy operator()(RealTy x, RealTy y) const {
+				return power<RealTy>()(x, RealTy(1.) / y);
+			}
+		};
 		
 	} /// end unnamed namespace
 
@@ -59,7 +65,7 @@ namespace cme {
 		typedef std::function<real_t(real_t, real_t)> operation_proc_t;
 
 	public:
-		_impl(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb)
+		_impl(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb)
 			: vtlb_(vtlb)
 			, ctlb_(ctlb)
 			, umftlb_(umftlb_)
@@ -86,7 +92,7 @@ namespace cme {
 			tmvalue_ = stack_.top();
 			stack_.pop();
 			stack_.top() = operation(stack_.top(), tmvalue_);
-		};
+		}
 
 		void do_calculate(token const& tok)
 		{
@@ -96,11 +102,21 @@ namespace cme {
 				stack_.push(details::string_to_real_cast(tok.get_name()));
 				break;
 			case token::id::variable:
-				stack_.push(vtlb_.at(tok.get_name()));
+			{
+				if (!vtlb_)
+					throw std::logic_error("Failed to calculate math expression. Reason: token-id: variable, variable-table: null.");
+
+				stack_.push(vtlb_->at(tok.get_name()));
 				break;
+			}
 			case token::id::constant:
-				stack_.push(details::string_to_real_cast(ctlb_.at(tok.get_name())));
+			{
+				if (!ctlb_)
+					throw std::logic_error("Failed to calculate math expression. Reason: token-id: constant, constant-table: null.");
+
+				stack_.push(details::string_to_real_cast(ctlb_->at(tok.get_name())));
 				break;
+			}
 			case token::id::plus:
 				build_operation(std::plus<real_t>());
 				break;
@@ -117,28 +133,33 @@ namespace cme {
 				stack_.top() = -stack_.top();
 				break;
 			case token::id::power: case token::id::power_function:
-				build_operation(power_);
+				build_operation(power<real_t>());
 				break;
 			case token::id::root_function:
-				build_operation([](real_t x, real_t y) { return power_(x, real_t(1.) / y); });
+				build_operation(root<real_t>());
 				break;
 			case token::id::function_name:
-				stack_.top() = umftlb_.at(tok.get_name()) (stack_.top());
+			{
+				if (!umftlb_)
+					throw std::logic_error("Failed to calculate math expression. Reason: token-id: function_name, unary-math-function-table: null.");
+
+				stack_.top() = umftlb_->at(tok.get_name()) (stack_.top());
 				break;
+			}
 			default:
 				throw std::invalid_argument(boost::str(boost::format("Failed to calculate math expression. Reason: unknown token id:[%1%]") % static_cast<int>(id)));
 			}
 		}
 		
 	private:
-		variable_table const& vtlb_;
-		constant_table const& ctlb_;
-		unary_math_function_table const& umftlb_;
+		variable_table_ptr_t vtlb_;
+		constant_table_ptr_t ctlb_;
+		unary_math_function_table_ptr_t umftlb_;
 		real_t tmvalue_;
 		stack_t stack_;
 	};
 
-	calculator::calculator(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb)
+	calculator::calculator(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb)
 		: impl_(new _impl(vtlb, ctlb, umftlb))
 	{
 	}

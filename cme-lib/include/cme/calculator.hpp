@@ -19,7 +19,7 @@ class calculator
 {
 	class _impl;
 public:
-	calculator(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb);
+	calculator(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb);
 	~calculator();
 	
 	real_t calculate(expression const& expr) const;

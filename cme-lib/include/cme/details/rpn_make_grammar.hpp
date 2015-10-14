@@ -21,7 +21,7 @@ namespace cme { namespace details {
 	{
 		typedef boost::spirit::qi::rule<iterator_type, string_t()> rule_t;
 	public:
-		rpn_make_grammar(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb);
+		rpn_make_grammar(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb);
 
 	private:
 		details::create_rpn_algorithm const alg_;

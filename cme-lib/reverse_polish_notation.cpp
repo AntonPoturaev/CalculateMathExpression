@@ -18,7 +18,7 @@ namespace cme {
 	class reverse_polish_notation::_impl
 	{
 	public:
-		_impl(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb)
+		_impl(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb)
 			: vtlb_(vtlb)
 			, ctlb_(ctlb)
 			, umftlb_(umftlb)
@@ -38,12 +38,12 @@ namespace cme {
 		}
 
 	private:
-		variable_table const& vtlb_;
-		constant_table const& ctlb_;
-		unary_math_function_table const& umftlb_;
+		variable_table_ptr_t vtlb_;
+		constant_table_ptr_t ctlb_;
+		unary_math_function_table_ptr_t umftlb_;
 	};
 
-	reverse_polish_notation::reverse_polish_notation(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb)
+	reverse_polish_notation::reverse_polish_notation(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb)
 		: impl_(new _impl(vtlb, ctlb, umftlb))
 	{
 	}

@@ -11,6 +11,7 @@
 #include <cme/details/table_base.hpp>
 
 #include <functional>
+#include <memory>
 
 namespace cme {
 
@@ -30,7 +31,11 @@ namespace cme {
 		constant_table();
 		constant_table(constant_table&& other);
 		constant_table& operator=(constant_table&& other);
+
+		static constant_table make_by_default();
 	};
+
+	typedef std::shared_ptr<constant_table const> constant_table_ptr_t;
 
 	struct unary_math_function_table
 		: public details::unary_math_function_table_t
@@ -38,7 +43,11 @@ namespace cme {
 		unary_math_function_table();
 		unary_math_function_table(unary_math_function_table&& other);
 		unary_math_function_table& operator=(unary_math_function_table&& other);
+
+		static unary_math_function_table make_by_default();
 	};
+
+	typedef std::shared_ptr<unary_math_function_table const> unary_math_function_table_ptr_t;
 
 	struct variable_table
 		: public details::variable_table_t
@@ -47,6 +56,8 @@ namespace cme {
 		variable_table(variable_table&& other);
 		variable_table& operator=(variable_table&& other);
 	};
+
+	typedef std::shared_ptr<variable_table const> variable_table_ptr_t;
 
 	bool verify_table(constant_table const& tlb);
 	bool verify_table(unary_math_function_table const& tlb);

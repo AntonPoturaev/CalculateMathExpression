@@ -19,7 +19,7 @@ class reverse_polish_notation
 {
 	class _impl;
 public:
-	reverse_polish_notation(variable_table const& vtlb, constant_table const& ctlb, unary_math_function_table const& umftlb);
+	reverse_polish_notation(variable_table_ptr_t const& vtlb, constant_table_ptr_t const& ctlb, unary_math_function_table_ptr_t const& umftlb);
 	~reverse_polish_notation();
 	
 	expression build(string_t const& str) const;
